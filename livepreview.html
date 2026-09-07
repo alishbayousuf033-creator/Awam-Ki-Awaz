@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Awam Ki Awaz - Live Preview</title>
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <!-- Live Preview CSS -->
+    <link rel="stylesheet" href="livepreview.css">
+</head>
+
+<body>
+
+    <!-- =========================================
+         NAVBAR
+    ========================================== -->
+
+    <nav class="navbar">
+
+        <!-- LOGO -->
+
+        <div class="nav-logo">
+
+            <div class="mic-icon">
+                <i class="fa-solid fa-microphone"></i>
+            </div>
+
+            <span>Awam Ki Awaz</span>
+
+        </div>
+
+
+        <!-- NAVIGATION -->
+
+        <div class="nav-links">
+
+            <a href="index.html">
+                Home
+            </a>
+
+
+            <!-- CATEGORIES -->
+
+            <div class="category-dropdown">
+
+                <a
+                    href="#"
+                    class="dropdown-toggle"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                >
+                    Categories
+
+                    <i
+                        class="fa-solid fa-chevron-down"
+                        aria-hidden="true"
+                    ></i>
+                </a>
+
+
+                <div class="dropdown-menu">
+
+                    <a
+                        href="index.html?cat=electricity"
+                        data-cat="electricity"
+                    >
+                        Electricity
+                    </a>
+
+                    <a
+                        href="index.html?cat=gas"
+                        data-cat="gas"
+                    >
+                        Gas
+                    </a>
+
+                    <a
+                        href="index.html?cat=water"
+                        data-cat="water"
+                    >
+                        Water
+                    </a>
+
+                    <a
+                        href="index.html?cat=roads"
+                        data-cat="roads"
+                    >
+                        Roads
+                    </a>
+
+                    <a
+                        href="index.html?cat=garbage"
+                        data-cat="garbage"
+                    >
+                        Garbage
+                    </a>
+
+                    <a
+                        href="index.html?cat=street-lights"
+                        data-cat="street-lights"
+                    >
+                        Street Lights
+                    </a>
+
+                    <a
+                        href="index.html?cat=wapda"
+                        data-cat="wapda"
+                    >
+                        WAPDA
+                    </a>
+
+                    <a
+                        href="index.html?cat=sewerage"
+                        data-cat="sewerage"
+                    >
+                        Sewerage
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- LIVE PREVIEW -->
+
+            <a
+                href="livepreview.html"
+                class="live-link active"
+                aria-label="Open Live Preview dashboard"
+            >
+
+                <span class="live-dot"></span>
+
+                Live Preview
+
+            </a>
+
+
+            <!-- ABOUT -->
+
+            <a href="about.html">
+                About
+            </a>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- =========================================
+         STATISTICS
+    ========================================== -->
+
+    <section class="stats">
+
+
+        <!-- TOTAL COMPLAINTS -->
+
+        <div class="stat-card total">
+
+            <div class="stat-icon">
+                ▥
+            </div>
+
+            <div class="stat-title">
+                TOTAL COMPLAINTS:
+            </div>
+
+            <div
+                class="stat-number"
+                id="totalComplaints"
+            >
+                0
+            </div>
+
+        </div>
+
+
+
+        <!-- RESOLUTION RATE -->
+
+        <div class="stat-card resolution">
+
+            <div class="resolution-title">
+
+                <span class="check">
+                    ✓
+                </span>
+
+                <span>
+                    RESOLUTION RATE:
+                </span>
+
+                <strong id="resolutionRate">
+                    0%
+                </strong>
+
+            </div>
+
+
+            <div class="gauge">
+
+                <div
+                    class="gauge-fill"
+                    id="resolutionGauge"
+                ></div>
+
+
+                <div class="gauge-flag">
+                    🇵🇰
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- PENDING -->
+
+        <div class="stat-card pending">
+
+            <div class="pending-dot"></div>
+
+            <div class="stat-title">
+                PENDING ISSUES:
+            </div>
+
+            <div class="stat-number">
+
+                <span id="pendingIssues">
+                    0
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================
+         LIVE MAP
+    ========================================== -->
+
+    <main class="map-area">
+
+
+        <!-- MAP BACKGROUND -->
+
+        <div class="map-background"></div>
+
+        <div class="map-overlay"></div>
+
+
+
+        <!-- =====================================
+             LEFT - PENDING COMPLAINTS
+        ====================================== -->
+
+        <div class="activity left">
+
+            <h2>
+                Pending Complaints
+            </h2>
+
+            <div
+                class="activity-list"
+                id="pendingStream"
+            ></div>
+
+        </div>
+
+
+
+        <!-- =====================================
+             RIGHT - RESOLVED COMPLAINTS
+        ====================================== -->
+
+        <div class="activity right">
+
+            <h2>
+                Recently Resolved
+            </h2>
+
+            <div
+                class="activity-list"
+                id="resolvedStream"
+            ></div>
+
+        </div>
+
+
+
+        <!-- =====================================
+             MAP PINS
+        ====================================== -->
+
+        <div class="pin green pin1"></div>
+
+        <div class="pin green pin2"></div>
+
+        <div class="pin red pin3">
+
+            <div class="complaint-label">
+                New Complaint
+            </div>
+
+        </div>
+
+        <div class="pin red pin4"></div>
+
+        <div class="pin yellow pin5"></div>
+
+        <div class="pin yellow pin6"></div>
+
+
+
+        <!-- =====================================
+             CITY NAMES
+        ====================================== -->
+
+        <div class="city nazimabad">
+            Nazimabad
+        </div>
+
+
+        <div class="city saddar">
+            Saddar
+        </div>
+
+
+        <div class="city gulshan">
+            Gulshan
+        </div>
+
+
+        <div class="city gulshan-iqbal">
+
+            Gulshan-e-Iqbal
+
+            <br>
+
+            Block 9
+
+        </div>
+
+
+        <div class="city clifton">
+            Clifton
+        </div>
+
+
+
+        <!-- =====================================
+             KARACHI TITLE
+        ====================================== -->
+
+        <div class="karachi-title">
+
+            <strong>
+                Karachi
+            </strong>
+
+            <small>
+                Live City Heatmap
+            </small>
+
+        </div>
+
+    </main>
+
+
+
+    <!-- =========================================
+         FOOTER
+    ========================================== -->
+
+    <footer class="bottom-bar">
+
+
+        <div>
+            Citizen Impact Score:
+
+            <strong>
+                50
+            </strong>
+        </div>
+
+
+        <div>
+            Top Responsive Department:
+
+            <b>
+                KMC
+            </b>
+        </div>
+
+
+        <div class="urdu">
+            عوام کی آواز — شکایت درج کریں
+        </div>
+
+    </footer>
+
+
+
+    <!-- =========================================
+         FIREBASE
+    ========================================== -->
+
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
+
+
+    <!-- =========================================
+         FIREBASE CONFIG
+         IMPORTANT:
+         Agar tumhare project mein Firebase
+         config kisi separate file mein hai,
+         woh file yahan load honi chahiye.
+    ========================================== -->
+
+    <script src="firebase-config.js"></script>
+
+
+
+    <!-- =========================================
+         AWAM KI AWAZ JS FILES
+         ORDER MAT CHANGE KARNA
+    ========================================== -->
+
+    <script src="aka-store.js"></script>
+
+    <script src="app.js"></script>
+
+    <script src="livepreview.js"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Awam Ki Awaz</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Nastaliq+Urdu:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=10">
+    <style>
+        /* ================================
+           Awam Ki Awaz - About Page Styles & Nav Fixes
+           ================================ */
+
+        /* Remove any accidental list dots in navbar */
+        .navbar ul.nav-links, 
+        .navbar .nav-links li {
+            list-style: none !important;
+            background: none !important;
+        }
+
+        /* Dropdown Fixes */
+        .category-dropdown {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            z-index: 120;
+            display: none;
+            min-width: 200px;
+            padding: 8px 0;
+            background: #071b30;
+            border: 1px solid rgba(0, 230, 184, 0.25);
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            list-style: none !important;
+        }
+
+        .category-dropdown:hover .dropdown-menu,
+        .category-dropdown.open .dropdown-menu {
+            display: block !important;
+        }
+
+        .dropdown-menu li {
+            list-style: none !important;
+            margin: 0;
+            padding: 0;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 10px 18px;
+            font-size: 13px;
+            color: #b9c5d4;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .dropdown-menu a:hover {
+            color: #00e6b8;
+            background: rgba(0, 230, 184, 0.1);
+            padding-left: 22px;
+        }
+
+        /* About Page Container Top Padding Fix */
+        .about-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 120px 20px 60px 20px !important;
+            color: #ffffff;
+        }
+
+        .about-hero {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .about-title {
+            font-size: 2.2rem;
+            color: #00feba;
+            margin-bottom: 15px;
+        }
+
+        .about-subtitle {
+            font-size: 1.05rem;
+            color: #94a3b8;
+            line-height: 1.6;
+            max-width: 750px;
+            margin: 0 auto;
+        }
+
+        .section-heading {
+            font-size: 1.6rem;
+            color: #ffffff;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        /* Features Grid Fix */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin-bottom: 60px;
+        }
+
+        .feature-card {
+            background: rgba(30, 41, 59, 0.7);
+            border: 1px solid rgba(0, 254, 186, 0.2);
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+            backdrop-filter: blur(5px);
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: #00feba;
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 12px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.1rem;
+            color: #00feba;
+            margin-bottom: 8px;
+        }
+
+        .feature-card p {
+            font-size: 0.85rem;
+            color: #cbd5e1;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        /* Developers Grid Fix */
+        .developers-section {
+            text-align: center;
+        }
+
+        .section-subtext {
+            color: #94a3b8;
+            margin-bottom: 30px;
+            font-size: 0.95rem;
+        }
+
+        .developers-grid {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .dev-card {
+            background: #1e293b;
+            border: 1px solid rgba(0, 254, 186, 0.3);
+            border-radius: 16px;
+            padding: 30px 40px;
+            text-align: center;
+            min-width: 220px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+
+        .dev-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .dev-avatar {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        .dev-card h3 {
+            font-size: 1.25rem;
+            color: #ffffff;
+            margin-bottom: 4px;
+        }
+
+        .dev-role {
+            font-size: 0.85rem;
+            color: #00feba;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Effect -->
+    <div class="city-map-bg">
+        <div class="glow-node" style="top: 20%; left: 30%"></div>
+        <div class="glow-node" style="top: 60%; left: 70%"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-brand" style="display: flex; align-items: center; gap: 10px; color: #00feba; font-weight: 600;">
+            <svg class="logo-icon-only" viewBox="0 0 24 24" width="28" height="28" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="akaIconGradAbout" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#00feba"/>
+                        <stop offset="100%" stop-color="#00c6a7"/>
+                    </linearGradient>
+                </defs>
+                <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z" fill="url(#akaIconGradAbout)"/>
+                <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z" fill="url(#akaIconGradAbout)"/>
+            </svg>
+            <span class="logo-text">Awam Ki Awaz</span>
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li class="category-dropdown">
+                <a href="#">Categories <svg width="12" height="8" viewBox="0 0 12 8"><path d="M1 1.5l5 5 5-5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg></a>
+                <ul class="dropdown-menu">
+                    <li><a href="index.html?dept=K-Electric%20(KE)">Electricity</a></li>
+                    <li><a href="index.html?dept=Karachi%20Water%20%26%20Sewerage%20Corporation%20(KWSC)">Water & Sewerage</a></li>
+                    <li><a href="index.html?dept=Sindh%20Solid%20Waste%20Management%20Board%20(SSWMB)">Garbage / Waste</a></li>
+                    <li><a href="index.html?dept=Karachi%20Metropolitan%20Corporation%20(KMC)">Roads & Infrastructure</a></li>
+                    <li><a href="index.html?dept=Sui%20Southern%20Gas%20Company%20(SSGC)">Gas Supply</a></li>
+                </ul>
+            </li>
+            <!-- Live Preview Link corrected to index.html or your main app page -->
+            <li><a href="livepreview.html" class="live-link"><span class="live-dot" style="display:inline-block;width:7px;height:7px;background:#ff3366;border-radius:50%;margin-right:5px;box-shadow:0 0 8px #ff3366;"></span>Live Preview</a></li>
+            <li><a href="about.html" class="active">About</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content Container -->
+    <main class="about-container">
+        <!-- Hero Section -->
+        <section class="about-hero">
+            <h1 class="about-title">Empowering Citizens Through Smart Civic Tech</h1>
+            <p class="about-subtitle">
+                <strong>Awam Ki Awaz</strong> is an AI-assisted portal designed to bridge the gap between citizens and municipal departments in Karachi. We transform raw voice complaints into structured, department-routed grievances.
+            </p>
+        </section>
+
+        <!-- Pros / Features Section -->
+        <section class="about-section">
+            <h2 class="section-heading">Why Awam Ki Awaz? (Key Features)</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎙️</div>
+                    <h3>Voice-to-Text Complaint Input</h3>
+                    <p>Speak naturally in Urdu or Roman Urdu. Our portal listens, transcribes, and structures your complaint effortlessly.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Smart AI Auto-Routing</h3>
+                    <p>No more guessing department names. The system auto-detects whether your issue belongs to K-Electric, KWSC, SSGC, or KMC.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📝</div>
+                    <h3>Formal Summary Generation</h3>
+                    <p>Converts everyday conversational voice messages into formal English grievance summaries ready for official submission.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📍</div>
+                    <h3>Location Parsing</h3>
+                    <p>Intelligently captures area details like block numbers and neighborhood names directly from your voice input.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Creators Section -->
+        <section class="about-section developers-section">
+            <h2 class="section-heading">Meet the Creators</h2>
+            <p class="section-subtext">Built with passion by two dedicated sisters driving innovation in civic technology.</p>
+            
+            <div class="developers-grid">
+                <div class="dev-card">
+                    <div class="dev-avatar">👩‍💻</div>
+                    <h3>Alishba Yousuf</h3>
+                    <span class="dev-role">Co-Founder & Web Developer</span>
+                </div>
+                <div class="dev-card">
+                    <div class="dev-avatar">👩‍💻</div>
+                    <h3>Areeba Asad</h3>
+                    <span class="dev-role">Co-Founder & Web Developer</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>

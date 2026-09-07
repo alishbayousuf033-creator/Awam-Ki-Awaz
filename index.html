@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Awam Ki Awaz - Har Sarkari Complaint</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Nastaliq+Urdu:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="styles.css?v=8">
+</head>
+<body>
+    <!-- Karachi City Map Background -->
+    <div class="city-map-bg">
+        <svg class="map-lines" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
+            <path d="M-50 400 Q150 350 300 420 T600 380 T900 430 T1250 390" />
+            <path d="M-50 520 Q200 480 400 530 T800 500 T1250 540" />
+            <path d="M-50 280 Q250 320 500 270 T900 300 T1250 260" />
+            <path d="M150 -50 Q180 200 160 450 T170 850" />
+            <path d="M450 -50 Q420 200 460 450 T440 850" />
+            <path d="M750 -50 Q780 200 760 450 T770 850" />
+            <path d="M1050 -50 Q1020 200 1060 450 T1040 850" />
+            <path d="M300 420 L450 270 L600 380 L750 300 L900 430" />
+            <path d="M160 450 L300 420 L460 530 L600 380 L760 500 L900 430" />
+            <path d="M400 530 L500 270 L600 380 L700 270 L800 500" />
+            <path d="M250 320 L450 270 L650 320 L850 270" />
+        </svg>
+        <div class="glow-node" style="top: 32%; left: 22%"></div>
+        <div class="glow-node" style="top: 48%; left: 38%"></div>
+        <div class="glow-node" style="top: 42%; left: 55%"></div>
+        <div class="glow-node" style="top: 58%; left: 72%"></div>
+        <div class="glow-node" style="top: 36%; left: 85%"></div>
+        <div class="glow-node" style="top: 68%; left: 48%"></div>
+        <div class="glow-node" style="top: 25%; left: 62%"></div>
+        <div class="glow-node" style="top: 75%; left: 28%"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-logo">
+            <div class="mic-icon" aria-hidden="true">
+                <i class="fa-solid fa-microphone"></i>
+            </div>
+            <span>Awam Ki Awaz</span>
+        </div>
+
+        <div class="nav-links">
+            <a href="index.html" class="active">Home</a>
+
+            <div class="category-dropdown">
+                <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">Categories <i class="fa-solid fa-chevron-down" aria-hidden="true"></i></a>
+                <div class="dropdown-menu">
+                    <a href="index.html?cat=electricity" data-cat="electricity">Electricity</a>
+                    <a href="index.html?cat=gas" data-cat="gas">Gas</a>
+                    <a href="index.html?cat=water" data-cat="water">Water</a>
+                    <a href="index.html?cat=roads" data-cat="roads">Roads</a>
+                    <a href="index.html?cat=garbage" data-cat="garbage">Garbage</a>
+                    <a href="index.html?cat=street-lights" data-cat="street-lights">Street Lights</a>
+                    <a href="index.html?cat=wapda" data-cat="wapda">WAPDA</a>
+                    <a href="index.html?cat=sewerage" data-cat="sewerage">Sewerage</a>
+                </div>
+            </div>
+
+            <a href="livepreview.html" class="live-link" aria-label="Open Live Preview dashboard">
+                <span class="live-dot"></span>
+                Live Preview
+            </a>
+            <a href="about.html">About</a>
+        </div>
+    </nav>
+
+    <!-- Main Hero Section -->
+    <main class="hero">
+        <div class="hero-content">
+            <div class="hero-logo-wrap">
+                <svg class="logo-hero" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-label="Awam Ki Awaz Logo">
+                    <defs>
+                        <linearGradient id="akaHeroGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#00feba"/>
+                            <stop offset="100%" stop-color="#00c6a7"/>
+                        </linearGradient>
+                    </defs>
+                    <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z" fill="url(#akaHeroGrad)"/>
+                    <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z" fill="url(#akaHeroGrad)"/>
+                </svg>
+                <h2 class="hero-logo-text">AWAM KI AWAZ</h2>
+                <p class="hero-logo-tagline">— SACH KI AWAZ, AWAM KE SATH —</p>
+            </div>
+
+            <h1 class="hero-title">One Portal, Har Sarkari Complaint.</h1>
+            <p class="hero-subtitle">Apna masla bolen ya likhen, baqi kaam hum sambhaal lenge.</p>
+
+            <!-- Voice & Text Command Box -->
+            <div class="command-box">
+                <div class="command-header">
+                    <span class="command-title">Voice Complaint Box</span>
+                </div>
+                <div class="command-body">
+                    <button id="micBtn" class="mic-button" aria-label="Record complaint" aria-pressed="false">
+                        <span class="mic-pulse"></span>
+                        <svg width="36" height="36" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
+                            <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
+                        </svg>
+                    </button>
+                    <div class="command-text">
+                        <input type="text" id="userInput" class="roman-input" placeholder="Apni complaint bolen ya Roman Urdu mein likhen..." />
+                    </div>
+                </div>
+                <div id="recordingBar" class="recording-bar hidden">
+                    <span class="recording-text">Recording chal rahi hai... Bolte rahein</span>
+                </div>
+                <p id="voiceSupportHint" class="voice-support-hint hidden" role="status"></p>
+            </div>
+
+            <!-- Quick Categories -->
+            <div class="categories-section">
+                <h3 class="categories-title">Karachi Quick Categories</h3>
+                <div class="categories-row">
+                    <button type="button" class="category-pill electricity" data-cat="electricity">
+                        <span class="cat-icon">⚡</span>
+                        <span>Electricity</span>
+                    </button>
+                    <button type="button" class="category-pill water" data-cat="water">
+                        <span class="cat-icon">💧</span>
+                        <span>Water</span>
+                    </button>
+                    <button type="button" class="category-pill garbage" data-cat="garbage">
+                        <span class="cat-icon">🗑️</span>
+                        <span>Garbage</span>
+                    </button>
+                    <button type="button" class="category-pill roads" data-cat="roads">
+                        <span class="cat-icon">🛣️</span>
+                        <span>Roads</span>
+                    </button>
+                    <button type="button" class="category-pill gas" data-cat="gas">
+                        <span class="cat-icon">🔥</span>
+                        <span>Sui Gas</span>
+                    </button>
+                    <button type="button" class="category-pill wapda" data-cat="wapda">
+                        <span class="cat-icon">🏭</span>
+                        <span>WAPDA</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+<!-- Smart Complaint Form Modal -->
+    <div id="complaintModal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal ticket-modal">
+            <button class="modal-close" id="closeModal" aria-label="Close complaint draft">&times;</button>
+
+            <div class="ticket-eyebrow">
+                <span><i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i> AI complaint desk</span>
+                <span class="draft-status"><i class="fa-solid fa-file-pen" aria-hidden="true"></i> Draft</span>
+            </div>
+
+            <div class="modal-header ticket-header">
+                <div class="modal-icon" aria-hidden="true"><i class="fa-solid fa-ticket"></i></div>
+                <div>
+                    <h2 id="modalTitle">Generated Complaint Ticket</h2>
+                    <p>Review the AI draft, make any edits, then send it to the right department.</p>
+                </div>
+            </div>
+
+            <form class="complaint-form ticket-form" id="smartComplaintForm">
+                <p id="autoFillNotice" class="auto-fill-notice hidden" role="status">
+                    Auto-filled from your voice transcript. Review and edit before submitting.
+                </p>
+
+                <section class="draft-signals" aria-label="Draft detection summary">
+                    <div class="draft-signal">
+                        <i class="fa-solid fa-tags" aria-hidden="true"></i>
+                        <span>Category</span>
+                        <strong id="draftCategory">Waiting for detection</strong>
+                    </div>
+                    <div class="draft-signal">
+                        <i class="fa-solid fa-building-shield" aria-hidden="true"></i>
+                        <span>Routed to</span>
+                        <strong id="draftDepartment">Choose a category to route</strong>
+                    </div>
+                    <div class="draft-signal">
+                        <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+                        <span>Area</span>
+                        <strong id="draftArea">Waiting for area</strong>
+                    </div>
+                </section>
+
+                <section class="ticket-section routing-section" aria-labelledby="routingTitle">
+                    <div class="ticket-section-heading">
+                        <span class="section-kicker">01 · Routing</span>
+                        <h3 id="routingTitle">Where should this go?</h3>
+                    </div>
+                    <div class="ticket-field-grid">
+                        <div class="form-group routing-box">
+                            <label for="complaintCategory">Complaint Category</label>
+                            <select id="complaintCategory" class="highlight-input" required>
+                                <option value="">Select category...</option>
+                                <option value="electricity">Electricity</option>
+                                <option value="gas">Gas</option>
+                                <option value="water">Water</option>
+                                <option value="roads">Roads</option>
+                                <option value="garbage">Garbage</option>
+                                <option value="street-lights">Street Lights</option>
+                                <option value="wapda">WAPDA</option>
+                                <option value="sewerage">Sewerage</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group routing-box">
+                            <label for="targetDepartment">Target Department</label>
+                            <input type="text" id="targetDepartment" readonly class="highlight-input" placeholder="Detecting department..." />
+                        </div>
+                    </div>
+                </section>
+
+                <section class="ticket-section" aria-labelledby="reporterTitle">
+                    <div class="ticket-section-heading">
+                        <span class="section-kicker">02 · Reporter</span>
+                        <h3 id="reporterTitle">Who and where?</h3>
+                    </div>
+                    <div class="ticket-field-grid">
+                        <div class="form-group">
+                            <label for="userName">Full Name</label>
+                            <input type="text" id="userName" placeholder="Apna poora naam likhen" required />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="complaintLocation">Area / Location</label>
+                            <input type="text" id="complaintLocation" placeholder="e.g. Gulistan-e-Johar, Block 1" required />
+                        </div>
+                    </div>
+                </section>
+
+                <section class="ticket-section" aria-labelledby="detailsTitle">
+                    <div class="ticket-section-heading">
+                        <span class="section-kicker">03 · Complaint details</span>
+                        <h3 id="detailsTitle">What happened?</h3>
+                    </div>
+                    <div class="form-group">
+                        <label for="complaintText">Voice Transcript / Original Message</label>
+                        <textarea id="complaintText" rows="3" placeholder="Recorded Urdu text will appear here..."></textarea>
+                    </div>
+                    <div class="form-group summary-field">
+                        <label for="englishSummary"><i class="fa-solid fa-sparkles" aria-hidden="true"></i> AI Formal English Summary</label>
+                        <textarea id="englishSummary" rows="4" placeholder="English detailed message will be generated here..."></textarea>
+                    </div>
+                </section>
+
+                <section class="ticket-section proof-section" aria-labelledby="proofTitle">
+                    <div class="ticket-section-heading">
+                        <span class="section-kicker">04 · Supporting proof</span>
+                        <h3 id="proofTitle">Attach an image <span>Optional</span></h3>
+                    </div>
+                    <div class="proof-upload">
+                        <label class="proof-picker" for="complaintImage">
+                            <i class="fa-solid fa-cloud-arrow-up" aria-hidden="true"></i>
+                            <span>Choose a photo</span>
+                            <small>PNG, JPG or WEBP · up to 5 MB</small>
+                        </label>
+                        <input type="file" id="complaintImage" accept="image/*" />
+                        <p class="proof-empty"><i class="fa-regular fa-image" aria-hidden="true"></i> Your image stays on this device and is not stored with the complaint.</p>
+                        <div id="imagePreview" class="image-preview hidden">
+                            <img id="imagePreviewImage" alt="Selected proof preview" />
+                            <div class="image-preview-details">
+                                <span id="imagePreviewName"></span>
+                                <small>Preview only</small>
+                            </div>
+                            <button type="button" id="removeImage" class="remove-image" aria-label="Remove selected proof image"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="ticket-actions">
+                    <p><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Your complaint will be saved as a pending ticket.</p>
+                    <button type="submit" class="submit-btn">Submit Complaint <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="statusToast" class="status-toast hidden" role="status" aria-live="polite"></div>
+    <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-storage-compat.js"></script>
+
+<script src="firebase-config.js"></script>
+
+<script src="aka-store.js?v=10"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<script>
+    emailjs.init({
+        publicKey: "Zon-bGx2QGsCVGV9"
+    });
+</script>
+
+<script src="app.js?v=12"></script>
+</body>
+</html>
