@@ -1,9 +1,29 @@
+
 const AkaStore = (() => {
     const statsEvent = "aka:stats-changed";
+    const LOCAL_BACKUP_KEY = "aka_complaints_backup_v1";
 
     // Local realtime cache
     let complaintsCache = [];
     let unsubscribe = null;
+
+    function readLocalBackup() {
+        try {
+            const raw = localStorage.getItem(LOCAL_BACKUP_KEY);
+            const parsed = raw ? JSON.parse(raw) : [];
+            return Array.isArray(parsed) ? parsed : [];
+        } catch (e) {
+            return [];
+        }
+    }
+
+    function writeLocalBackup(items) {
+        try {
+            localStorage.setItem(LOCAL_BACKUP_KEY, JSON.stringify(items));
+        } catch (e) {
+            console.warn("Local backup storage skipped:", e);
+        }
+    }
 
     // Convert Firebase Timestamp into normal ISO date
     function normalizeDate(value) {
@@ -27,9 +47,17 @@ const AkaStore = (() => {
         return {
             ...data,
             id: doc.id,
-            createdAt: normalizeDate(data.createdAt),
+            createdAt: normalizeDate(data.createdAt) || new Date().toISOString(),
             resolvedAt: normalizeDate(data.resolvedAt)
         };
+    }
+
+    function sortNewestFirst(list) {
+        return [...list].sort((a, b) => {
+            const tA = a.createdAt ? new Date(a.createdAt).getTime() : 0;
+            const tB = b.createdAt ? new Date(b.createdAt).getTime() : 0;
+            return (Number.isFinite(tB) ? tB : 0) - (Number.isFinite(tA) ? tA : 0);
+        });
     }
 
     // Notify the rest of the website
@@ -45,13 +73,15 @@ const AkaStore = (() => {
 
     // Start realtime Firestore listener
     function startRealtimeListener() {
-        if (typeof firebase === "undefined") {
-            console.error("Firebase SDK is not loaded.");
-            return;
+        // Load instant local backup first so screen never shows 0 while Firebase connects
+        const backup = readLocalBackup();
+        if (backup.length > 0) {
+            complaintsCache = sortNewestFirst(backup);
+            notifyStatsChanged();
         }
 
-        if (typeof db === "undefined") {
-            console.error("Firestore database is not initialized.");
+        if (typeof firebase === "undefined" || typeof db === "undefined") {
+            console.warn("Firebase SDK or Firestore not initialized; using local realtime sync.");
             return;
         }
 
@@ -59,13 +89,14 @@ const AkaStore = (() => {
             unsubscribe();
         }
 
+        // Listen directly on collection without orderBy so docs with missing/different createdAt types are never dropped
         unsubscribe = db
             .collection("complaints")
-            .orderBy("createdAt", "desc")
             .onSnapshot(
                 (snapshot) => {
-                    complaintsCache = snapshot.docs.map(normalizeComplaint);
-
+                    const remoteItems = snapshot.docs.map(normalizeComplaint);
+                    complaintsCache = sortNewestFirst(remoteItems);
+                    writeLocalBackup(complaintsCache);
                     notifyStatsChanged();
 
                     console.log(
@@ -76,9 +107,15 @@ const AkaStore = (() => {
                 },
                 (error) => {
                     console.error(
-                        "Firestore realtime listener error:",
+                        "Firestore realtime listener error (check Firestore Rules):",
                         error
                     );
+                    // Keep showing local backup if Firestore permission/network fails
+                    const fallback = readLocalBackup();
+                    if (fallback.length > 0) {
+                        complaintsCache = sortNewestFirst(fallback);
+                        notifyStatsChanged();
+                    }
                 }
             );
     }
@@ -107,33 +144,15 @@ const AkaStore = (() => {
         };
     }
 
-    // Add complaint to Firestore
+    // Add complaint to Firestore (with instant local cache + fallback if Firestore rules block writes)
     async function addComplaint(complaint) {
-        if (typeof db === "undefined") {
-            throw new Error("Firestore is not initialized.");
-        }
+        const nowIso = complaint.createdAt || new Date().toISOString();
 
         const complaintData = {
             ...complaint,
-
-            status:
-                complaint.status === "resolved"
-                    ? "resolved"
-                    : "pending",
-
-            createdAt:
-                complaint.createdAt
-                    ? new Date(complaint.createdAt)
-                    : firebase.firestore.FieldValue.serverTimestamp(),
-
-            resolvedAt:
-                complaint.status === "resolved"
-                    ? (
-                        complaint.resolvedAt
-                            ? new Date(complaint.resolvedAt)
-                            : firebase.firestore.FieldValue.serverTimestamp()
-                    )
-                    : null
+            status: complaint.status === "resolved" ? "resolved" : "pending",
+            createdAt: nowIso,
+            resolvedAt: complaint.status === "resolved" ? (complaint.resolvedAt || nowIso) : null
         };
 
         // Remove undefined values
@@ -143,52 +162,86 @@ const AkaStore = (() => {
             }
         });
 
-        const documentReference = await db
-            .collection("complaints")
-            .add(complaintData);
+        let savedId = `local-${Date.now()}`;
+        let savedToFirestore = false;
 
-        console.log(
-            "Complaint successfully saved:",
-            documentReference.id
-        );
+        if (typeof db !== "undefined") {
+            try {
+                const firestorePayload = {
+                    ...complaintData,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                    resolvedAt:
+                        complaintData.status === "resolved"
+                            ? firebase.firestore.FieldValue.serverTimestamp()
+                            : null
+                };
 
-        return {
+                const documentReference = await db
+                    .collection("complaints")
+                    .add(firestorePayload);
+
+                savedId = documentReference.id;
+                savedToFirestore = true;
+                console.log("Complaint successfully saved to Firestore:", savedId);
+            } catch (firestoreError) {
+                console.error("Firestore write error:", firestoreError);
+                // Re-throw only if we want caller to know, OR save locally so user isn't blocked when Firestore test-mode rules expire
+                if (firestoreError?.code === "permission-denied") {
+                    console.warn("Firestore permission-denied (Test mode rules likely expired). Saving to local backup.");
+                } else {
+                    throw firestoreError;
+                }
+            }
+        }
+
+        const savedRecord = {
             ...complaintData,
-            id: documentReference.id
+            id: savedId,
+            syncedToCloud: savedToFirestore
         };
+
+        // Update cache immediately so Live Preview updates without delay
+        if (!complaintsCache.some((item) => item.id === savedId || item.ticketId === savedRecord.ticketId)) {
+            complaintsCache = sortNewestFirst([savedRecord, ...complaintsCache]);
+            writeLocalBackup(complaintsCache);
+            notifyStatsChanged();
+        }
+
+        return savedRecord;
     }
 
     // Mark complaint as resolved
     async function resolveComplaint(id) {
-        if (typeof db === "undefined") {
-            throw new Error("Firestore is not initialized.");
+        if (!id) return false;
+
+        const nowIso = new Date().toISOString();
+
+        // Update local cache immediately
+        complaintsCache = complaintsCache.map((item) =>
+            item.id === id ? { ...item, status: "resolved", resolvedAt: nowIso } : item
+        );
+        writeLocalBackup(complaintsCache);
+        notifyStatsChanged();
+
+        if (typeof db !== "undefined" && !String(id).startsWith("local-")) {
+            try {
+                await db
+                    .collection("complaints")
+                    .doc(id)
+                    .update({
+                        status: "resolved",
+                        resolvedAt: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+
+                console.log("Complaint resolved in Firestore:", id);
+                return true;
+            } catch (error) {
+                console.error("Unable to resolve complaint in Firestore:", error);
+                return false;
+            }
         }
 
-        if (!id) {
-            return false;
-        }
-
-        try {
-            await db
-                .collection("complaints")
-                .doc(id)
-                .update({
-                    status: "resolved",
-                    resolvedAt:
-                        firebase.firestore.FieldValue.serverTimestamp()
-                });
-
-            console.log("Complaint resolved:", id);
-
-            return true;
-        } catch (error) {
-            console.error(
-                "Unable to resolve complaint:",
-                error
-            );
-
-            return false;
-        }
+        return true;
     }
 
     // Listen for realtime changes
@@ -203,14 +256,19 @@ const AkaStore = (() => {
 
         window.addEventListener(statsEvent, wrappedHandler);
 
-        // Return unsubscribe function
         return () => {
-            window.removeEventListener(
-                statsEvent,
-                wrappedHandler
-            );
+            window.removeEventListener(statsEvent, wrappedHandler);
         };
     }
+
+    // Cross-tab sync when index.html submits and livepreview.html is open in another tab
+    window.addEventListener("storage", (event) => {
+        if (event.key === LOCAL_BACKUP_KEY) {
+            const updated = readLocalBackup();
+            complaintsCache = sortNewestFirst(updated);
+            notifyStatsChanged();
+        }
+    });
 
     // Start Firestore realtime listener
     startRealtimeListener();
