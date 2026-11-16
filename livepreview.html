@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,139 +21,39 @@
 
 <body>
 
-    <!-- =========================================
-         NAVBAR
-    ========================================== -->
-
+      <!-- Navigation -->
     <nav class="navbar">
-
-        <!-- LOGO -->
-
         <div class="nav-logo">
-
-            <div class="mic-icon">
+            <div class="mic-icon" aria-hidden="true">
                 <i class="fa-solid fa-microphone"></i>
             </div>
-
             <span>Awam Ki Awaz</span>
-
         </div>
-
-
-        <!-- NAVIGATION -->
 
         <div class="nav-links">
-
-            <a href="index.html">
-                Home
-            </a>
-
-
-            <!-- CATEGORIES -->
+            <a href="index.html" class="active">Home</a>
 
             <div class="category-dropdown">
-
-                <a
-                    href="#"
-                    class="dropdown-toggle"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                >
-                    Categories
-
-                    <i
-                        class="fa-solid fa-chevron-down"
-                        aria-hidden="true"
-                    ></i>
-                </a>
-
-
+                <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">Categories <i class="fa-solid fa-chevron-down" aria-hidden="true"></i></a>
                 <div class="dropdown-menu">
-
-                    <a
-                        href="index.html?cat=electricity"
-                        data-cat="electricity"
-                    >
-                        Electricity
-                    </a>
-
-                    <a
-                        href="index.html?cat=gas"
-                        data-cat="gas"
-                    >
-                        Gas
-                    </a>
-
-                    <a
-                        href="index.html?cat=water"
-                        data-cat="water"
-                    >
-                        Water
-                    </a>
-
-                    <a
-                        href="index.html?cat=roads"
-                        data-cat="roads"
-                    >
-                        Roads
-                    </a>
-
-                    <a
-                        href="index.html?cat=garbage"
-                        data-cat="garbage"
-                    >
-                        Garbage
-                    </a>
-
-                    <a
-                        href="index.html?cat=street-lights"
-                        data-cat="street-lights"
-                    >
-                        Street Lights
-                    </a>
-
-                    <a
-                        href="index.html?cat=wapda"
-                        data-cat="wapda"
-                    >
-                        WAPDA
-                    </a>
-
-                    <a
-                        href="index.html?cat=sewerage"
-                        data-cat="sewerage"
-                    >
-                        Sewerage
-                    </a>
-
+                    <a href="index.html?cat=electricity" data-cat="electricity">Electricity</a>
+                    <a href="index.html?cat=gas" data-cat="gas">Gas</a>
+                    <a href="index.html?cat=water" data-cat="water">Water</a>
+                    <a href="index.html?cat=roads" data-cat="roads">Roads</a>
+                    <a href="index.html?cat=garbage" data-cat="garbage">Garbage</a>
+                    <a href="index.html?cat=street-lights" data-cat="street-lights">Street Lights</a>
+                    <a href="index.html?cat=wapda" data-cat="wapda">WAPDA</a>
+                    <a href="index.html?cat=sewerage" data-cat="sewerage">Sewerage</a>
                 </div>
-
             </div>
 
-
-            <!-- LIVE PREVIEW -->
-
-            <a
-                href="livepreview.html"
-                class="live-link active"
-                aria-label="Open Live Preview dashboard"
-            >
-
+            <a href="livepreview.html" class="live-link" aria-label="Open Live Preview dashboard">
                 <span class="live-dot"></span>
-
                 Live Preview
-
             </a>
-
-
-            <!-- ABOUT -->
-
-            <a href="about.html">
-                About
-            </a>
-
+            <a href="index.html#howToUse">Kaise Istemal Karein?</a>
+            <a href="about.html">About</a>
         </div>
-
     </nav>
 
 
@@ -419,9 +321,9 @@
          FIREBASE
     ========================================== -->
 
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
 
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
 
 
 
