@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ur">
 <head>
@@ -8,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Nastaliq+Urdu:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="styles.css?v=8">
+    <link rel="stylesheet" href="styles.css?v=11">
 </head>
 <body>
     <!-- Karachi City Map Background -->
@@ -66,6 +67,7 @@
                 <span class="live-dot"></span>
                 Live Preview
             </a>
+            <a href="#howToUse">Kaise Istemal Karein?</a>
             <a href="about.html">About</a>
         </div>
     </nav>
@@ -105,18 +107,48 @@
                         </svg>
                     </button>
                     <div class="command-text">
-                        <input type="text" id="userInput" class="roman-input" placeholder="Apni complaint bolen ya Roman Urdu mein likhen..." />
+                        <div class="command-input-group">
+                            <input type="text" id="userInput" class="roman-input" placeholder="Apni complaint bolen ya Roman Urdu mein likhen..." />
+                            <button type="button" id="voiceSubmitBtn" class="command-submit-btn">
+                                <span>Submit</span>
+                                <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                        <div id="continuePromptBar" class="continue-prompt-bar hidden" role="status">
+                            <span class="continue-prompt-text"><i class="fa-solid fa-pause-circle" aria-hidden="true"></i> Awaz ruk gayi hai — kya aap apni baat continue karna chahte hain?</span>
+                            <button type="button" id="continueVoiceBtn" class="continue-voice-btn">
+                                <i class="fa-solid fa-microphone" aria-hidden="true"></i> Continue Speaking
+                            </button>
+                        </div>
                     </div>
                 </div>
                 <div id="recordingBar" class="recording-bar hidden">
                     <span class="recording-text">Recording chal rahi hai... Bolte rahein</span>
                 </div>
                 <p id="voiceSupportHint" class="voice-support-hint hidden" role="status"></p>
+
+                <!-- NEW: Voice Instructions & Required Fields Guide -->
+                <div class="voice-guide-box">
+                    <div class="voice-guide-alert">
+                        <i class="fa-solid fa-circle-exclamation"></i>
+                        <span><strong>Zaroori Hidayat:</strong> Voice record karte waqt neeche di gayi <strong>4 cheezein</strong> zaroor bolein, warna form submit nahi hoga:</span>
+                    </div>
+                    <div class="required-chips">
+                        <span class="req-chip"><i class="fa-solid fa-user"></i> Apna Poora Naam</span>
+                        <span class="req-chip"><i class="fa-solid fa-location-dot"></i> Ilaqa / Block</span>
+                        <span class="req-chip"><i class="fa-solid fa-layer-group"></i> Maslay ki Qisam (Bijli/Pani/Gas)</span>
+                        <span class="req-chip"><i class="fa-solid fa-comment-dots"></i> Maslay ki Tafseel</span>
+                    </div>
+                    <div class="voice-example">
+                        <span class="example-badge">Bolne ki Misaal:</span>
+                        <p>"Mera naam <strong>Alishba Yousuf </strong> hai, main <strong>Gulistan-e-Johar Block 12</strong> mein rehti hoon, aur hamare ilaqay mein <strong>3 din se bijli nahi aa rahi</strong>."</p>
+                    </div>
+                </div>
             </div>
 
             <!-- Quick Categories -->
             <div class="categories-section">
-                <h3 class="categories-title">Karachi Quick Categories</h3>
+                <h3 class="categories-title">Karachi Quick Categories (Khud Form Bharne Ke Liye)</h3>
                 <div class="categories-row">
                     <button type="button" class="category-pill electricity" data-cat="electricity">
                         <span class="cat-icon">⚡</span>
@@ -144,9 +176,39 @@
                     </button>
                 </div>
             </div>
+
+            <!-- NEW: Step-by-Step User Guide Section -->
+            <section id="howToUse" class="how-to-section" aria-labelledby="howToHeading">
+                <h3 id="howToHeading" class="how-to-title">Ye Website Kaise Kaam Karti Hai? (3 Aasan Steps)</h3>
+                <p class="how-to-subtitle">Agar aap pehli baar istemal kar rahe hain, to neeche diye gaye tareeqay se apni shikayat darj karwayein:</p>
+
+                <div class="steps-grid">
+                    <div class="step-card">
+                        <div class="step-number">01</div>
+                        <div class="step-icon"><i class="fa-solid fa-microphone-lines"></i></div>
+                        <h4>Bolein Ya Category Chunein</h4>
+                        <p>Upar <strong>Mic button</strong> daba kar apna naam, ilaqa aur masla bolein — ya agar type karna chahein to neeche kisi bhi <strong>Category</strong> par click karein.</p>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-number">02</div>
+                        <div class="step-icon"><i class="fa-solid fa-file-circle-check"></i></div>
+                        <h4>Form Check Aur Submit Karein</h4>
+                        <p>Aap ki boli gayi maloomat khud-ba-khud form mein bhar kar screen par khul jayegi. Apna <strong>Naam, Ilaqa aur Category</strong> check kar ke <strong>Submit</strong> dabayein.</p>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-number">03</div>
+                        <div class="step-icon"><i class="fa-solid fa-chart-line"></i></div>
+                        <h4>Live Status Dekhein</h4>
+                        <p>Submit hotay hi aap ki complaint mutaliqa idaray (K-Electric, SSGC, KWSB waghaira) ko chali jayegi aur aap upar <strong>Live Preview</strong> mein status dekh sakte hain.</p>
+                    </div>
+                </div>
+            </section>
         </div>
     </main>
-<!-- Smart Complaint Form Modal -->
+
+    <!-- Smart Complaint Form Modal -->
     <div id="complaintModal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
         <div class="modal ticket-modal">
             <button class="modal-close" id="closeModal" aria-label="Close complaint draft">&times;</button>
@@ -194,7 +256,7 @@
                     </div>
                     <div class="ticket-field-grid">
                         <div class="form-group routing-box">
-                            <label for="complaintCategory">Complaint Category</label>
+                            <label for="complaintCategory">Complaint Category <span class="req-star">*</span></label>
                             <select id="complaintCategory" class="highlight-input" required>
                                 <option value="">Select category...</option>
                                 <option value="electricity">Electricity</option>
@@ -222,12 +284,17 @@
                     </div>
                     <div class="ticket-field-grid">
                         <div class="form-group">
-                            <label for="userName">Full Name</label>
+                            <label for="userName">Full Name <span class="req-star">*</span></label>
                             <input type="text" id="userName" placeholder="Apna poora naam likhen" required />
                         </div>
 
                         <div class="form-group">
-                            <label for="complaintLocation">Area / Location</label>
+                            <label for="userPhone">Phone Number <span class="req-star">*</span></label>
+                            <input type="tel" id="userPhone" placeholder="e.g. 0300-1234567" pattern="[0-9+\-\s]{10,15}" title="Sahih mobile number likhen (e.g. 0300-1234567)" required />
+                        </div>
+
+                        <div class="form-group full-span-field">
+                            <label for="complaintLocation">Area / Location <span class="req-star">*</span></label>
                             <input type="text" id="complaintLocation" placeholder="e.g. Gulistan-e-Johar, Block 1" required />
                         </div>
                     </div>
@@ -239,12 +306,12 @@
                         <h3 id="detailsTitle">What happened?</h3>
                     </div>
                     <div class="form-group">
-                        <label for="complaintText">Voice Transcript / Original Message</label>
-                        <textarea id="complaintText" rows="3" placeholder="Recorded Urdu text will appear here..."></textarea>
+                        <label for="complaintText">Voice Transcript / Original Message <span class="req-star">*</span></label>
+                        <textarea id="complaintText" rows="3" placeholder="Recorded Urdu text will appear here..." required></textarea>
                     </div>
                     <div class="form-group summary-field">
-                        <label for="englishSummary"><i class="fa-solid fa-sparkles" aria-hidden="true"></i> AI Formal English Summary</label>
-                        <textarea id="englishSummary" rows="4" placeholder="English detailed message will be generated here..."></textarea>
+                        <label for="englishSummary"><i class="fa-solid fa-sparkles" aria-hidden="true"></i> AI Formal English Summary <span class="req-star">*</span></label>
+                        <textarea id="englishSummary" rows="4" placeholder="English detailed message will be generated here..." required></textarea>
                     </div>
                 </section>
 
@@ -282,20 +349,16 @@
 
     <div id="statusToast" class="status-toast hidden" role="status" aria-live="polite"></div>
     <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-storage-compat.js"></script>
-
-<script src="firebase-config.js"></script>
-
-<script src="aka-store.js?v=10"></script>
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-
-<script>
-    emailjs.init({
-        publicKey: "Zon-bGx2QGsCVGV9"
-    });
-</script>
-
-<script src="app.js?v=12"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-storage-compat.js"></script>
+    <script src="firebase-config.js"></script>
+    <script src="aka-store.js?v=10"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+        emailjs.init({
+            publicKey: "Zon-bGx2QGsCVGV9"
+        });
+    </script>
+    <script src="app.js?v=14"></script>
 </body>
 </html>
