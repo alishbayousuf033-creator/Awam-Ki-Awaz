@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -200,38 +201,39 @@
         <div class="glow-node" style="top: 60%; left: 70%"></div>
     </div>
 
-    <!-- Navigation -->
+      <!-- Navigation -->
     <nav class="navbar">
-        <div class="nav-brand" style="display: flex; align-items: center; gap: 10px; color: #00feba; font-weight: 600;">
-            <svg class="logo-icon-only" viewBox="0 0 24 24" width="28" height="28" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <linearGradient id="akaIconGradAbout" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#00feba"/>
-                        <stop offset="100%" stop-color="#00c6a7"/>
-                    </linearGradient>
-                </defs>
-                <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z" fill="url(#akaIconGradAbout)"/>
-                <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z" fill="url(#akaIconGradAbout)"/>
-            </svg>
-            <span class="logo-text">Awam Ki Awaz</span>
+        <div class="nav-logo">
+            <div class="mic-icon" aria-hidden="true">
+                <i class="fa-solid fa-microphone"></i>
+            </div>
+            <span>Awam Ki Awaz</span>
         </div>
 
-        <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li class="category-dropdown">
-                <a href="#">Categories <svg width="12" height="8" viewBox="0 0 12 8"><path d="M1 1.5l5 5 5-5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg></a>
-                <ul class="dropdown-menu">
-                    <li><a href="index.html?dept=K-Electric%20(KE)">Electricity</a></li>
-                    <li><a href="index.html?dept=Karachi%20Water%20%26%20Sewerage%20Corporation%20(KWSC)">Water & Sewerage</a></li>
-                    <li><a href="index.html?dept=Sindh%20Solid%20Waste%20Management%20Board%20(SSWMB)">Garbage / Waste</a></li>
-                    <li><a href="index.html?dept=Karachi%20Metropolitan%20Corporation%20(KMC)">Roads & Infrastructure</a></li>
-                    <li><a href="index.html?dept=Sui%20Southern%20Gas%20Company%20(SSGC)">Gas Supply</a></li>
-                </ul>
-            </li>
-            <!-- Live Preview Link corrected to index.html or your main app page -->
-            <li><a href="livepreview.html" class="live-link"><span class="live-dot" style="display:inline-block;width:7px;height:7px;background:#ff3366;border-radius:50%;margin-right:5px;box-shadow:0 0 8px #ff3366;"></span>Live Preview</a></li>
-            <li><a href="about.html" class="active">About</a></li>
-        </ul>
+        <div class="nav-links">
+            <a href="index.html" class="active">Home</a>
+
+            <div class="category-dropdown">
+                <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">Categories <i class="fa-solid fa-chevron-down" aria-hidden="true"></i></a>
+                <div class="dropdown-menu">
+                    <a href="index.html?cat=electricity" data-cat="electricity">Electricity</a>
+                    <a href="index.html?cat=gas" data-cat="gas">Gas</a>
+                    <a href="index.html?cat=water" data-cat="water">Water</a>
+                    <a href="index.html?cat=roads" data-cat="roads">Roads</a>
+                    <a href="index.html?cat=garbage" data-cat="garbage">Garbage</a>
+                    <a href="index.html?cat=street-lights" data-cat="street-lights">Street Lights</a>
+                    <a href="index.html?cat=wapda" data-cat="wapda">WAPDA</a>
+                    <a href="index.html?cat=sewerage" data-cat="sewerage">Sewerage</a>
+                </div>
+            </div>
+
+            <a href="livepreview.html" class="live-link" aria-label="Open Live Preview dashboard">
+                <span class="live-dot"></span>
+                Live Preview
+            </a>
+            <a href="index.html#howToUse">Kaise Istemal Karein?</a>
+            <a href="about.html">About</a>
+        </div>
     </nav>
 
     <!-- Main Content Container -->
