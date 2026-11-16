@@ -1,3 +1,4 @@
+
 /* ================================
    Awam Ki Awaz - Front Page Styles
    ================================ */
@@ -404,6 +405,91 @@ body {
     box-shadow: 0 0 0 3px rgba(0, 212, 170, 0.1);
 }
 
+.command-input-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.command-input-group .roman-input {
+    flex: 1;
+}
+
+.command-submit-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 22px;
+    border: none;
+    border-radius: var(--radius-sm);
+    background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+    color: #001a14;
+    font-size: 0.95rem;
+    font-weight: 700;
+    font-family: inherit;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.command-submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 212, 170, 0.35);
+}
+
+.continue-prompt-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 12px;
+    padding: 10px 14px;
+    border-radius: var(--radius-sm);
+    background: rgba(0, 212, 170, 0.09);
+    border: 1px solid rgba(0, 212, 170, 0.32);
+}
+
+.continue-prompt-bar.hidden {
+    display: none;
+}
+
+.continue-prompt-text {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-primary);
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.continue-prompt-text i {
+    color: var(--accent-primary);
+}
+
+.continue-voice-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 14px;
+    border-radius: 50px;
+    border: 1px solid var(--accent-primary);
+    background: rgba(0, 212, 170, 0.16);
+    color: var(--accent-primary);
+    font-size: 0.82rem;
+    font-weight: 700;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.continue-voice-btn:hover {
+    background: var(--accent-primary);
+    color: #001a14;
+    transform: translateY(-1px);
+}
+
 /* Recording Bar */
 .recording-bar {
     display: flex;
@@ -424,6 +510,87 @@ body {
     font-weight: 500;
 }
 
+/* Voice Instructions & Required Fields Guide */
+.voice-guide-box {
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(0, 212, 170, 0.18);
+    text-align: left;
+}
+
+.voice-guide-alert {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+    line-height: 1.5;
+}
+
+.voice-guide-alert i {
+    color: var(--accent-primary);
+    margin-top: 3px;
+    flex-shrink: 0;
+}
+
+.voice-guide-alert strong {
+    color: var(--accent-primary);
+}
+
+.required-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 14px;
+}
+
+.req-chip {
+    background: rgba(0, 212, 170, 0.09);
+    border: 1px solid rgba(0, 212, 170, 0.28);
+    color: var(--text-primary);
+    font-size: 0.78rem;
+    font-weight: 500;
+    padding: 5px 11px;
+    border-radius: 50px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.req-chip i {
+    color: var(--accent-primary);
+    font-size: 0.75rem;
+}
+
+.voice-example {
+    background: rgba(0, 0, 0, 0.3);
+    border-left: 3px solid var(--accent-primary);
+    padding: 11px 14px;
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+}
+
+.example-badge {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--accent-primary);
+    margin-bottom: 4px;
+}
+
+.voice-example p {
+    margin: 0;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+.voice-example strong {
+    color: var(--text-primary);
+}
+
 /* Categories Section */
 .categories-section {
     position: relative;
@@ -433,7 +600,7 @@ body {
 .categories-title {
     font-size: 1.4rem;
     font-weight: 700;
-    margin-bottom: 8px;
+    margin-bottom: 14px;
     color: var(--text-primary);
     text-shadow: 0 0 20px rgba(0, 212, 170, 0.25);
 }
@@ -523,6 +690,93 @@ body {
 
 .cat-icon {
     font-size: 1.1rem;
+}
+
+/* 3-Step How To Use Section */
+.how-to-section {
+    margin-top: 52px;
+    padding-top: 36px;
+    border-top: 1px solid rgba(0, 212, 170, 0.14);
+    text-align: center;
+    scroll-margin-top: 95px;
+}
+
+.how-to-title {
+    font-size: 1.45rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+    text-shadow: 0 0 20px rgba(0, 212, 170, 0.2);
+}
+
+.how-to-subtitle {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin-bottom: 26px;
+}
+
+.steps-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    text-align: left;
+}
+
+.step-card {
+    background: var(--bg-panel);
+    border: 1px solid rgba(0, 212, 170, 0.22);
+    border-radius: var(--radius-md);
+    padding: 22px;
+    position: relative;
+    backdrop-filter: blur(14px);
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.step-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent-primary);
+    box-shadow: 0 12px 30px rgba(0, 212, 170, 0.14);
+}
+
+.step-number {
+    position: absolute;
+    top: 16px;
+    right: 18px;
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: rgba(0, 212, 170, 0.18);
+}
+
+.step-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    background: rgba(0, 212, 170, 0.12);
+    border: 1px solid rgba(0, 212, 170, 0.25);
+    color: var(--accent-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    margin-bottom: 14px;
+}
+
+.step-card h4 {
+    color: var(--text-primary);
+    font-size: 1.02rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.step-card p {
+    color: var(--text-secondary);
+    font-size: 0.88rem;
+    line-height: 1.55;
+    margin: 0;
+}
+
+.step-card strong {
+    color: var(--accent-primary);
 }
 
 /* Modal */
@@ -983,6 +1237,15 @@ select.highlight-input option {
     gap: 14px;
 }
 
+#complaintModal .full-span-field {
+    grid-column: 1 / -1;
+}
+
+#complaintModal .req-star {
+    color: var(--danger);
+    font-weight: 800;
+}
+
 #complaintModal .form-group {
     gap: 7px;
 }
@@ -1318,6 +1581,11 @@ select.highlight-input option {
     .command-body { flex-direction: column; text-align: center; }
     .mic-button { width: 76px; height: 76px; }
     .command-text { width: 100%; }
+    .command-input-group { flex-direction: column; }
+    .command-submit-btn { width: 100%; }
+    .continue-prompt-bar { flex-direction: column; align-items: stretch; text-align: center; }
+    .continue-voice-btn { justify-content: center; }
+    .steps-grid { grid-template-columns: 1fr; }
     .category-pill { padding: 10px 16px; font-size: 0.88rem; }
     .modal { padding: 24px; }
 }
