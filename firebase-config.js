@@ -1,4 +1,4 @@
-// Firebase configuration (Awam Ki Azadi - New Project)
+// Firebase configuration
 const firebaseConfig = {
     apiKey: "AIzaSyB7n7lAX32qreby1PAupEcMF3kE45wZNrS",
     authDomain: "awam-ki-awaz-109b0.firebaseapp.com",
