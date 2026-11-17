@@ -400,6 +400,17 @@ function buildEnglishSummary(category, transcript, name, location, phone = "") {
     return summary;
 }
 
+function regenerateSummary() {
+    if (!englishSummary || englishSummary.classList.contains("manually-edited")) return;
+    englishSummary.value = buildEnglishSummary(
+        currentCategory,
+        complaintText?.value.trim() ?? "",
+        nameField?.value.trim() ?? "",
+        locationField?.value.trim() ?? "",
+        phoneField?.value.trim() ?? ""
+    );
+}
+
 function updateDraftDetails() {
     if (draftCategory) draftCategory.textContent = currentCategory ? categories[currentCategory].label : "Waiting for detection";
     if (draftDepartment) draftDepartment.textContent = currentCategory ? categories[currentCategory].department : "Choose a category to route";
@@ -637,19 +648,24 @@ if (modal) {
             const targetDeptEmail = getTargetDepartmentEmail(currentCategory);
             sendComplaintToBackend({ ticketId, category: currentCategory, department: details.department, targetEmail: targetDeptEmail, name, phone, location, issueText: text, summary });
 
+            // EmailJS isolated so email errors never block ticket generation
             if (typeof emailjs !== "undefined") {
-                await emailjs.send("Service_of5qeth", "Template_kaozxt9", {
-                    ticket_id: ticketId,
-                    to_email: targetDeptEmail,
-                    category: details.label,
-                    department: details.department,
-                    name: name || "Voice Citizen",
-                    phone: phone || "Not Specified",
-                    location: location || "Not Specified",
-                    complaint: text,
-                    summary: summary,
-                    status: "Pending"
-                });
+                try {
+                    await emailjs.send("Service_of5qeth", "Template_kaozxt9", {
+                        ticket_id: ticketId,
+                        to_email: targetDeptEmail,
+                        category: details.label,
+                        department: details.department,
+                        name: name || "Voice Citizen",
+                        phone: phone || "Not Specified",
+                        location: location || "Not Specified",
+                        complaint: text,
+                        summary: summary,
+                        status: "Pending"
+                    });
+                } catch (emailErr) {
+                    console.warn("EmailJS warning:", emailErr);
+                }
             }
 
             complaintForm.reset();
@@ -664,6 +680,7 @@ if (modal) {
             closeComplaintModal();
             showToast(`Ticket #${ticketId} generated successfully!`);
         } catch (error) {
+            console.error("Firestore save error:", error);
             showToast("Submission failed. Check connection.");
         }
     });
